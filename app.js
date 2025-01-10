@@ -27,7 +27,8 @@ function h1() {
   render(this, 'inside', header);
 }
 
-function matrixBg() {
+function matrixBg() 
+{
     const container = select('document');
     const canvas = create({ type: "canvas" });
     render(container, "inside", canvas);
