@@ -1,16 +1,16 @@
 
-import { onlyjs } from "./only.js";
-import { create } from "./create.js";
-import { render } from "./render.js";
-import { select } from "./select.js";
-import { resetStyles } from "./resetStyles.js";
+import { onlyjs } from "./onlyjs/only.js";
+import { create } from "./onlyjs/create.js";
+import { render } from "./onlyjs/render.js";
+import { select } from "./onlyjs/select.js";
+import { resetStyles } from "./onlyjs/resetStyles.js";
 
 onlyjs(main);
 function main() {
   resetStyles();
-  //h1();
+  h1();
   //div();
-  test1();
+  //test1();
  }
 
 function h1() {
