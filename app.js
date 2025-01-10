@@ -24,7 +24,6 @@ function h1() {
   };
 
   const header = create(header_att, header_style);
-  const h2 = create(h2_attr);
   render(this, 'inside', header);
 }
 
