@@ -28,56 +28,54 @@ function h1() {
 }
 
 function matrixBg() {
-      const container = document.getElementById(containerId);
-      const canvas = document.createElement("canvas");
-      container.appendChild(canvas);
-      const ctx = canvas.getContext("2d");
+    const container = select('document');
+    const canvas = create({ type: "canvas" });
+    render(container, "inside", canvas);
 
-      // Resize canvas to fit the container
-      canvas.width = container.offsetWidth;
-      canvas.height = container.offsetHeight;
+    const ctx = canvas.getContext("2d");
 
-      // Matrix effect settings
-      const fontSize = 14;
-      const columns = Math.floor(canvas.width / fontSize);
-      const drops = Array(columns).fill(1);
+    // Resize canvas to fit the container
+    const resizeCanvas = () => {
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+    };
+    resizeCanvas();
 
-      // Characters for the matrix effect
-      const characters = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789";
-      const charArray = characters.split("");
+    // Matrix effect settings
+    const fontSize = 14;
+    const characters = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789";
+    const charArray = characters.split("");
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = Array(columns).fill(1);
 
-      // Function to draw the matrix effect
-      function drawMatrix() {
+    // Function to draw the matrix effect
+    function drawMatrix() {
         ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.fillStyle = "#0F0"; // Green text
-        ctx.font = fontSize + "px monospace";
+        ctx.font = ${fontSize}px monospace;
 
         for (let i = 0; i < drops.length; i++) {
-          const text = charArray[Math.floor(Math.random() * charArray.length)];
-          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            const text = charArray[Math.floor(Math.random() * charArray.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-          // Reset drop position if it goes out of view
-          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-            drops[i] = 0;
-          }
-          drops[i]++;
+            // Reset drop position if it goes out of view
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+            drops[i]++;
         }
 
         requestAnimationFrame(drawMatrix);
-      }
-
-      drawMatrix();
-
-      // Handle resizing
-      window.addEventListener("resize", () => {
-        canvas.width = container.offsetWidth;
-        canvas.height = container.offsetHeight;
-        drops.length = Math.floor(canvas.width / fontSize);
-        drops.fill(1);
-      });
     }
 
-    startMatrixEffect("matrix-container");
+    drawMatrix();
+
+    // Handle resizing with normal JS
+    window.addEventListener("resize", () => {
+        resizeCanvas();
+        columns = Math.floor(canvas.width / fontSize);
+        drops = Array(columns).fill(1);
+    });
 }
