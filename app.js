@@ -28,9 +28,6 @@ function h1() {
 }
 
 function matrixBg() {
-
-function startMatrixEffect(containerId) {
-      // Create and append the canvas to the container
       const container = document.getElementById(containerId);
       const canvas = document.createElement("canvas");
       container.appendChild(canvas);
