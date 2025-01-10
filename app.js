@@ -29,51 +29,59 @@ function h1() {
 }
 
 function matrixBg() {
-  const canvas_attr = {
-    type: 'canvas',
-    id: 'canvas__matrix',
-  };
-  const canvas = create(canvas_attr);
 
-  const ctx = canvas.getContext("2d");
+function startMatrixEffect(containerId) {
+      // Create and append the canvas to the container
+      const container = document.getElementById(containerId);
+      const canvas = document.createElement("canvas");
+      container.appendChild(canvas);
+      const ctx = canvas.getContext("2d");
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+      // Resize canvas to fit the container
+      canvas.width = container.offsetWidth;
+      canvas.height = container.offsetHeight;
 
-  const letters = '0123456789ABCDEF';
-  const fontSize = 16;
-  const columns = canvas.width / fontSize;
-  const drops = Array(Math.floor(columns)).fill(1);
+      // Matrix effect settings
+      const fontSize = 14;
+      const columns = Math.floor(canvas.width / fontSize);
+      const drops = Array(columns).fill(1);
 
-  function draw() {
-    // Draw background with semi-transparent color
-    ctx.fillStyle = 'rgba(30,30,46,0.3)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Characters for the matrix effect
+      const characters = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789";
+      const charArray = characters.split("");
 
-    // Set the text style
-    ctx.fillStyle = '#61afef';
-    ctx.font = `${fontSize}px monospace`;
+      // Function to draw the matrix effect
+      function drawMatrix() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Loop over drops array
-    drops.forEach((y, x) => {
-      const text = letters[Math.floor(Math.random() * letters.length)];
-      ctx.fillText(text, x * fontSize, y * fontSize);
+        ctx.fillStyle = "#0F0"; // Green text
+        ctx.font = fontSize + "px monospace";
 
-      // Reset drop if it reaches the bottom of the screen
-      if (y * fontSize > canvas.height && Math.random() > 0.975) {
-        drops[x] = 0;
+        for (let i = 0; i < drops.length; i++) {
+          const text = charArray[Math.floor(Math.random() * charArray.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+          // Reset drop position if it goes out of view
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+
+        requestAnimationFrame(drawMatrix);
       }
-      drops[x]++;
-    });
-  }
 
-  // Resize canvas when window size changes
-  window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
+      drawMatrix();
 
-  // Assuming render is a function that properly appends the canvas to the DOM
-  render('inside', canvas); // Remove `this` unless it's required for some reason
-  setInterval(draw, 33); // Start the animation
+      // Handle resizing
+      window.addEventListener("resize", () => {
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+        drops.length = Math.floor(canvas.width / fontSize);
+        drops.fill(1);
+      });
+    }
+
+    startMatrixEffect("matrix-container");
 }
