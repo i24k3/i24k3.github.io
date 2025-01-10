@@ -8,8 +8,8 @@ import { resetStyles } from "./onlyjs/resetStyles.js";
 onlyjs(main);
 function main() {
   resetStyles();
-  h1();
   matrixBg();
+  h1();
  }
 
 function h1() {
