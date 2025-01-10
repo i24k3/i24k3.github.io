@@ -28,7 +28,6 @@ function h1() {
   render(this, 'inside', header);
 }
 
-
 function matrixBg() {
   const canvas_attr = {
     type: 'canvas',
@@ -43,33 +42,38 @@ function matrixBg() {
 
   const letters = '0123456789ABCDEF';
   const fontSize = 16;
-  const columns = canvas.width/fontSize;
+  const columns = canvas.width / fontSize;
   const drops = Array(Math.floor(columns)).fill(1);
 
-
   function draw() {
+    // Draw background with semi-transparent color
     ctx.fillStyle = 'rgba(30,30,46,0.3)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    // Set the text style
     ctx.fillStyle = '#61afef';
-    ctx.font = `${fontsize}px monospace`;
+    ctx.font = `${fontSize}px monospace`;
 
-    drops.foreach((x, y))=> {
+    // Loop over drops array
+    drops.forEach((y, x) => {
       const text = letters[Math.floor(Math.random() * letters.length)];
-      ctx.fontText(text, x*fontSize, y*fontSize);
+      ctx.fillText(text, x * fontSize, y * fontSize);
 
-
-      if (y*fontSize > canvas.height && Math.random() > 0.975) {
+      // Reset drop if it reaches the bottom of the screen
+      if (y * fontSize > canvas.height && Math.random() > 0.975) {
         drops[x] = 0;
       }
       drops[x]++;
     });
   }
+
+  // Resize canvas when window size changes
   window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
 
-  render(this, 'inside', canvas);
-
+  // Assuming render is a function that properly appends the canvas to the DOM
+  render('inside', canvas); // Remove `this` unless it's required for some reason
+  setInterval(draw, 33); // Start the animation
 }
