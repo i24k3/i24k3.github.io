@@ -5,11 +5,18 @@ import { render } from "./onlyjs/render.js";
 import { select } from "./onlyjs/select.js";
 import { resetStyles } from "./onlyjs/resetStyles.js";
 
+import { Background } from "./onlyjs/styles/background.js";
+
 onlyjs(main);
 function main() {
   resetStyles();
+  bodyBg();
   h1();
  }
+
+function bodyBg() {
+  Background.matrix();
+}
 
 function h1() {
   const header_att= {
