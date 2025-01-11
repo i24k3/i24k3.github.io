@@ -27,6 +27,8 @@ function h1() {
     textAlign: 'center',
     border: '1px solid black',
     padding: '11px 0px',
+    backgroundColor: 'white',
+    margin: 'auto 22px',
   };
 
   const header = create(header_att, header_style);
