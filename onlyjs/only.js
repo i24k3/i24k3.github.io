@@ -37,9 +37,11 @@ export function onlyjs(main) {
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', main);
+      clearCache();
 
     } else {
         main();
+      clearCache();
     }
 
 }
