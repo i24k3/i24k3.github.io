@@ -15,7 +15,7 @@ function main() {
  }
 
 function bodyBg() {
-  Background.matrix('#9856db');
+  Background.matrix('#ff0000');
 }
 
 function h1() {
