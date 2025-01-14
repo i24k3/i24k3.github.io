@@ -3,8 +3,8 @@ import { render } from './../render.js';
 
 class Background {
   static matrix(color = '#0F0') {
-    // Check if the device is mobile (you can refine this if needed)
-    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+    // Check if the device is mobile using user agent and screen width
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
 
     // Create canvas element
     const canvasAttrs = {
@@ -48,6 +48,12 @@ class Background {
         columns = Math.floor(newWidth / 20); // 20px for each column
         drops = new Array(columns).fill(0); // Re-initialize drops for each column
       }
+
+      // Ensure canvas size is correctly updated for mobile too
+      if (isMobile && (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight)) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
     }
 
     // Debounce the resize handler to avoid excessive resizing during fast scrolls
@@ -55,6 +61,9 @@ class Background {
       clearTimeout(resizeTimeout); // Clear the previous timeout
       resizeTimeout = setTimeout(resizeCanvas, 200); // Call resizeCanvas after 200ms delay
     });
+
+    // Initial canvas size setup
+    resizeCanvas();
 
     // Matrix effect function
     function draw() {
@@ -274,6 +283,6 @@ static gradient(colors = ['#000', '#00f']) {
 
 export { Background };
 
-*/
 
+*/
 
