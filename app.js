@@ -3,6 +3,7 @@ import { onlyjs } from "./onlyjs/only.js";
 import { create } from "./onlyjs/create.js";
 import { render } from "./onlyjs/render.js";
 import { select } from "./onlyjs/select.js";
+import { style, applyStyle } from "./onlyjs/style.js";
 import { resetStyles } from "./onlyjs/resetStyles.js";
 
 import { Background } from "./onlyjs/styles/background.js";
@@ -10,12 +11,19 @@ import { Background } from "./onlyjs/styles/background.js";
 onlyjs(main);
 function main() {
   resetStyles();
+
+  setTitle();
+
   bodyBg();
   containerMain();
   sectionLeft();
   sectionRight();
 
  }
+
+function setTitle() {
+  document.title = 'Versatile Dev portfolio';
+}
 
 function bodyBg() {
   Background.matrix('#ff878f');
