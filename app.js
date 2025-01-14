@@ -59,7 +59,7 @@ function sectionLeft() {
   const leftDiv_style= {
     border: '1px solid white',
     width: '30vw',
-    height: '95vh',
+    height: '100vh',
     margin: '11px',
 
   };
@@ -78,7 +78,7 @@ function sectionRight() {
   const rightDiv_style= {
     border: '1px solid white',
     width: '70vw',
-    height: '95vh',
+    height: '100vh',
     margin: '11px',
 
   };
