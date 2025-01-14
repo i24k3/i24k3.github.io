@@ -11,28 +11,75 @@ onlyjs(main);
 function main() {
   resetStyles();
   bodyBg();
-  h1();
+  containerMain();
+  sectionLeft();
+  sectionRight();
+
  }
 
 function bodyBg() {
-  Background.matrix('#ff0000');
+  Background.matrix('#ff878f');
 }
 
-function h1() {
-  const header_att= {
-    type: 'h1',
-  };
-
-  const header_style ={
-    textAlign: 'center',
-    border: '1px solid black',
-    padding: '11px 0px',
-    backgroundColor: 'white',
-    margin: 'auto 22px',
-  };
-
-  const header = create(header_att, header_style);
-  render(this, 'inside', header);
+function header() {
 }
+
+
+
+function containerMain() {
+  const containerMain_attr= {
+    type: 'div',
+    id: 'mainDiv',
+  };
+  const containerMain_style = {
+    //backgroundColor: 'lightseagreen',
+    display: 'flex',
+    width: '100%',
+    height: '100vh',
+
+  };
+
+  const containerMain = create(containerMain_attr, containerMain_style);
+  render(this, 'after', containerMain);
+}
+
+function sectionLeft() {
+  const leftDiv_attr = {
+    type: 'div',
+  };
+
+  const leftDiv_style= {
+    border: '1px solid white',
+    width: '30vw',
+    height: '95vh',
+    margin: '11px',
+
+  };
+
+  const leftDiv = create(leftDiv_attr, leftDiv_style);
+  const mainContainer = select('#mainDiv');
+  render(mainContainer, 'inside', leftDiv);
+}
+
+
+function sectionRight() {
+  const rightDiv_attr = {
+    type: 'div',
+  };
+
+  const rightDiv_style= {
+    border: '1px solid white',
+    width: '70vw',
+    height: '95vh',
+    margin: '11px',
+
+  };
+
+  const mainContainer = select('#mainDiv');
+  const rightDiv= create(rightDiv_attr, rightDiv_style);
+  render(mainContainer, 'inside', rightDiv);
+}
+
+
 
 
