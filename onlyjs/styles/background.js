@@ -28,9 +28,27 @@ class Background {
     let columns = Math.floor(window.innerWidth / 20); // 20px for each column
     let drops = new Array(columns).fill(0); // Initialize drops for each column
 
-    // Set the canvas size once to fit the initial viewport size
+    // Set the initial canvas size based on the viewport size
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    // Function to handle the resizing conditionally
+    function resizeCanvas() {
+      const currentWidth = canvas.width;
+      const currentHeight = canvas.height;
+      const newWidth = window.innerWidth;
+      const newHeight = window.innerHeight;
+
+      // Only resize the canvas if the dimensions have changed
+      if (currentWidth !== newWidth || currentHeight !== newHeight) {
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+
+        // Recalculate the number of columns for the matrix effect
+        columns = Math.floor(newWidth / 20); // 20px for each column
+        drops = new Array(columns).fill(0); // Re-initialize drops for each column
+      }
+    }
 
     // Matrix effect function
     function draw() {
@@ -64,6 +82,9 @@ class Background {
 
     // Start the matrix animation
     requestAnimationFrame(draw);
+
+    // Add event listener to resize canvas only when necessary
+    window.addEventListener('resize', resizeCanvas);
   }
 
   static gradient(colors = ['#000', '#00f']) {
@@ -89,7 +110,7 @@ class Background {
     // Get the context and set canvas size
     const ctx = canvas.getContext('2d');
 
-    // Set canvas size to cover the full screen initially
+    // Set initial canvas size
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
