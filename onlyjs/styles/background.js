@@ -25,24 +25,12 @@ class Background {
 
     // Matrix effect settings
     const ctx = canvas.getContext('2d');
-    let columns = 0;
-    let drops = [];
+    let columns = Math.floor(window.innerWidth / 20); // 20px for each column
+    let drops = new Array(columns).fill(0); // Initialize drops for each column
 
-    // Function to update canvas size only when window size changes
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      // Recalculate number of columns for the matrix effect
-      columns = Math.floor(canvas.width / 20); // 20px for each column
-      drops = new Array(columns).fill(0); // Initialize drops for each column
-    }
-
-    // Initial canvas size setup
-    resizeCanvas();
-
-    // Event listener for window resize, to update canvas size
-    window.addEventListener('resize', resizeCanvas);
+    // Set the canvas size once to fit the initial viewport size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     // Matrix effect function
     function draw() {
@@ -101,17 +89,9 @@ class Background {
     // Get the context and set canvas size
     const ctx = canvas.getContext('2d');
 
-    // Function to update canvas size
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
-    // Initial canvas size setup
-    resizeCanvas();
-
-    // Event listener for window resize
-    window.addEventListener('resize', resizeCanvas);
+    // Set canvas size to cover the full screen initially
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     // Create gradient
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
