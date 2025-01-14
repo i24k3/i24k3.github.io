@@ -78,7 +78,7 @@ function sectionRight() {
   const rightDiv_style= {
     border: '1px solid white',
     width: '70vw',
-    height: '100vh',
+    height: '700px',
     margin: '11px',
 
   };
