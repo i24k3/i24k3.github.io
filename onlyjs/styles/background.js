@@ -33,14 +33,18 @@ class Background {
     canvas.height = window.innerHeight;
 
     // Function to handle the resizing conditionally
+    let resizeTimeout;
     function resizeCanvas() {
       const currentWidth = canvas.width;
       const currentHeight = canvas.height;
       const newWidth = window.innerWidth;
       const newHeight = window.innerHeight;
 
-      // Only resize the canvas if the dimensions have changed
-      if (currentWidth !== newWidth || currentHeight !== newHeight) {
+      // Define a threshold for resizing (e.g., 10px difference)
+      const threshold = 10;
+
+      // Only resize the canvas if the dimensions have changed significantly
+      if (Math.abs(currentWidth - newWidth) > threshold || Math.abs(currentHeight - newHeight) > threshold) {
         canvas.width = newWidth;
         canvas.height = newHeight;
 
@@ -49,6 +53,12 @@ class Background {
         drops = new Array(columns).fill(0); // Re-initialize drops for each column
       }
     }
+
+    // Debounce the resize handler to avoid excessive resizing during fast scrolls
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout); // Clear the previous timeout
+      resizeTimeout = setTimeout(resizeCanvas, 200); // Call resizeCanvas after 200ms delay
+    });
 
     // Matrix effect function
     function draw() {
@@ -82,9 +92,6 @@ class Background {
 
     // Start the matrix animation
     requestAnimationFrame(draw);
-
-    // Add event listener to resize canvas only when necessary
-    window.addEventListener('resize', resizeCanvas);
   }
 
   static gradient(colors = ['#000', '#00f']) {
