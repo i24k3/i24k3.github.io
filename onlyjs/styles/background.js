@@ -31,39 +31,26 @@ class Background {
     let columns = Math.floor(window.innerWidth / 20); // 20px for each column
     let drops = new Array(columns).fill(0); // Initialize drops for each column
 
-    // Function to handle the resizing conditionally
-    let resizeTimeout;
+    // Function to handle the initial canvas size based on the body content
     function resizeCanvas() {
-      const currentWidth = canvas.width;
-      const currentHeight = canvas.height;
-      const newWidth = window.innerWidth;
-      const newHeight = window.innerHeight;
+      const bodyHeight = document.body.scrollHeight; // Get the body content height
 
-      // Only resize if not on mobile (or if mobile and we need to reset the matrix size)
-      if (!isMobile && (Math.abs(currentWidth - newWidth) > 10 || Math.abs(currentHeight - newHeight) > 10)) {
-        canvas.width = newWidth;
-        canvas.height = newHeight;
+      // Set the canvas size to the body's scroll height and window width
+      canvas.width = window.innerWidth;
+      canvas.height = bodyHeight; // Set the height based on the body content
 
-        // Recalculate the number of columns for the matrix effect
-        columns = Math.floor(newWidth / 20); // 20px for each column
-        drops = new Array(columns).fill(0); // Re-initialize drops for each column
-      }
-
-      // Ensure canvas size is correctly updated for mobile too
-      if (isMobile && (canvas.width !== window.innerWidth || canvas.height !== window.innerHeight)) {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      }
+      // Recalculate the number of columns for the matrix effect
+      columns = Math.floor(window.innerWidth / 20); // 20px for each column
+      drops = new Array(columns).fill(0); // Re-initialize drops for each column
     }
 
-    // Debounce the resize handler to avoid excessive resizing during fast scrolls
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout); // Clear the previous timeout
-      resizeTimeout = setTimeout(resizeCanvas, 200); // Call resizeCanvas after 200ms delay
-    });
-
-    // Initial canvas size setup
+    // Initial canvas size setup based on body content
     resizeCanvas();
+
+    // Resize event handler to update canvas size when window is resized
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+    });
 
     // Matrix effect function
     function draw() {
@@ -124,7 +111,7 @@ class Background {
 
     // Set initial canvas size
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = document.body.scrollHeight; // Set to body's content height
 
     // Create gradient
     const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
