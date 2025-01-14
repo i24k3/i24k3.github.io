@@ -32,7 +32,7 @@ export function create(element, styles = '') {
   if (typeof element === 'object') {
 
   const htmlElement = document.createElement(element.type);
-  const noTextElements = ['div', 'span', 'img', 'input'];
+  const noTextElements = ['div', 'span', 'img', 'input', 'canvas', 'br', 'hr', 'meta', 'video', 'audio'];
 
   if (noTextElements.includes(element.type.toLowerCase())) {
     htmlElement.innerText = '';
@@ -65,6 +65,10 @@ export function create(element, styles = '') {
     }
   }
   return htmlElement;
+} else {
+  console.warn(`
+  method 'create()' takes object's as argument,
+  i.e 'create(elementObj, elementStyleObj)', please provide parms of suitable data type`);
 }
 }
 
