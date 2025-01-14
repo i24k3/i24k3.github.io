@@ -30,7 +30,6 @@ class Background {
 
     // Function to update canvas size only when window size changes
     function resizeCanvas() {
-      // Only update canvas size if the window has actually resized
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
 
@@ -70,10 +69,13 @@ class Background {
         // Update the drop position
         drops[i]++;
       }
+
+      // Continue the animation using requestAnimationFrame for smoother updates
+      requestAnimationFrame(draw);
     }
 
-    // Set the draw interval to animate the matrix effect
-    setInterval(draw, 33);
+    // Start the matrix animation
+    requestAnimationFrame(draw);
   }
 
   static gradient(colors = ['#000', '#00f']) {
