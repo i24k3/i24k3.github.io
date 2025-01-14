@@ -3,6 +3,9 @@ import { render } from './../render.js';
 
 class Background {
   static matrix(color = '#0F0') {
+    // Check if the device is mobile (you can refine this if needed)
+    const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+
     // Create canvas element
     const canvasAttrs = {
       type: 'canvas',
@@ -11,7 +14,7 @@ class Background {
     };
 
     const canvasStyle = {
-      position: 'fixed',  // Fixed positioning to stay in place when scrolling
+      position: isMobile ? 'absolute' : 'fixed',  // On mobile, use absolute positioning
       top: '0',
       left: '0',
       right: '0',
@@ -28,10 +31,6 @@ class Background {
     let columns = Math.floor(window.innerWidth / 20); // 20px for each column
     let drops = new Array(columns).fill(0); // Initialize drops for each column
 
-    // Set the initial canvas size based on the viewport size
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
     // Function to handle the resizing conditionally
     let resizeTimeout;
     function resizeCanvas() {
@@ -40,11 +39,8 @@ class Background {
       const newWidth = window.innerWidth;
       const newHeight = window.innerHeight;
 
-      // Define a threshold for resizing (e.g., 10px difference)
-      const threshold = 10;
-
-      // Only resize the canvas if the dimensions have changed significantly
-      if (Math.abs(currentWidth - newWidth) > threshold || Math.abs(currentHeight - newHeight) > threshold) {
+      // Only resize if not on mobile (or if mobile and we need to reset the matrix size)
+      if (!isMobile && (Math.abs(currentWidth - newWidth) > 10 || Math.abs(currentHeight - newHeight) > 10)) {
         canvas.width = newWidth;
         canvas.height = newHeight;
 
