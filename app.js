@@ -3,7 +3,7 @@ import { onlyjs } from "./onlyjs/only.js";
 import { create } from "./onlyjs/create.js";
 import { render } from "./onlyjs/render.js";
 import { select } from "./onlyjs/select.js";
-import { style, applyStyle } from "./onlyjs/style.js";
+import { style, setStyle } from "./onlyjs/style.js";
 import { resetStyles } from "./onlyjs/resetStyles.js";
 
 import { Background } from "./onlyjs/styles/background.js";
