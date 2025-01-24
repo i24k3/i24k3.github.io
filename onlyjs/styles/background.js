@@ -63,9 +63,13 @@ class Background {
 
       // Apply canvas styles for small or medium screens
       if (isSmallScreen || isMediumScreen) {
-        // Don't resize the canvas on small/medium screens
+        // Set fixed canvas size for small and medium screens
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight; 
+        canvas.height = window.innerHeight;
+        
+        // Adjust matrix effect for small/medium screens
+        columns = Math.floor(canvas.width / 10); // More columns for better visibility
+        drops = new Array(columns).fill(0); // Initialize drops for each column
       } else {
         // Full screen styles for large screens
         resizeCanvas();
@@ -109,58 +113,55 @@ class Background {
     setInterval(draw, 33);
   }
 
-static gradient(colors = ['#000', '#00f']) {
-  // Create canvas element and set its style
-  const canvasAttrs = {
-    type: 'canvas',
-    id: 'gradientCanvas',
-    className: 'background'
-  };
+  static gradient(colors = ['#000', '#00f']) {
+    // Create canvas element and set its style
+    const canvasAttrs = {
+      type: 'canvas',
+      id: 'gradientCanvas',
+      className: 'background'
+    };
 
-  const canvasStyle = {
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    width: '100%',
-    height: '100%',
-    zIndex: '-1' // To place the canvas in the background
-  };
+    const canvasStyle = {
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      width: '100%',
+      height: '100%',
+      zIndex: '-1' // To place the canvas in the background
+    };
 
-  const canvas = create(canvasAttrs, canvasStyle);
-  render(document.body, 'inside', canvas);
+    const canvas = create(canvasAttrs, canvasStyle);
+    render(document.body, 'inside', canvas);
 
-  // Get the context and set canvas size
-  const ctx = canvas.getContext('2d');
+    // Get the context and set canvas size
+    const ctx = canvas.getContext('2d');
 
-  // Function to update canvas size
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Function to update canvas size
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    // Initial canvas size setup
+    resizeCanvas();
+
+    // Event listener for window resize
+    window.addEventListener('resize', resizeCanvas);
+
+    // Create gradient
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+
+    // Add color stops to the gradient
+    const colorStops = 1 / (colors.length - 1);
+    colors.forEach((color, index) => {
+      gradient.addColorStop(colorStops * index, color);
+    });
+
+    // Fill the background with the gradient
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
-
-  // Initial canvas size setup
-  resizeCanvas();
-
-  // Event listener for window resize
-  window.addEventListener('resize', resizeCanvas);
-
-  // Create gradient
-  const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-
-  // Add color stops to the gradient
-  const colorStops = 1 / (colors.length - 1);
-  colors.forEach((color, index) => {
-    gradient.addColorStop(colorStops * index, color);
-  });
-
-  // Fill the background with the gradient
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
-
 }
 
 export { Background };
-
-
 
