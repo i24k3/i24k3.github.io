@@ -26,7 +26,7 @@ function setTitle() {
 }
 
 function bodyBg() {
-  Background.gradient('#ff878f');
+  Background.gradient();
 }
 
 function header() {
