@@ -6,7 +6,6 @@ import { select } from "./onlyjs/select.js";
 import { style, setStyle } from "./onlyjs/style.js";
 import { resetStyles } from "./onlyjs/resetStyles.js";
 
-import { Background } from "./onlyjs/styles/background.js";
 
 onlyjs(main);
 function main() {
@@ -14,7 +13,6 @@ function main() {
 
   setTitle();
 
-  bodyBg();
   containerMain();
   sectionLeft();
   sectionRight();
@@ -25,9 +23,6 @@ function setTitle() {
   document.title = 'Versatile Dev portfolio';
 }
 
-function bodyBg() {
-  Background.gradient();
-}
 
 function header() {
 }
@@ -61,6 +56,7 @@ function sectionLeft() {
     width: '30vw',
     height: '100vh',
     margin: '11px',
+    backgroundColor: 'aquamarine',
 
   };
 
@@ -80,7 +76,7 @@ function sectionRight() {
     width: '70vw',
     height: '700px',
     margin: '11px',
-
+    backgroundColor: 'darkseagreen',
   };
 
   const mainContainer = select('#mainDiv');
