@@ -1,10 +1,7 @@
 
-import { onlyjs } from "./onlyjs/only.js";
-import { create } from "./onlyjs/create.js";
-import { render } from "./onlyjs/render.js";
-import { select } from "./onlyjs/select.js";
-import { style, setStyle } from "./onlyjs/style.js";
-import { resetStyles } from "./onlyjs/resetStyles.js";
+import { onlyjs, create, render, select, } from "./onlyjs/onlyjsMinified.js";
+import { style, setStyle } from "./onlyjs/onlyjsMinified.js";
+import { resetStyles } from "./onlyjs/onlyjsMinified.js";
 
 
 onlyjs(main);
