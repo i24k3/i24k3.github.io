@@ -1,13 +1,14 @@
 import { onlyjs, create, render, resetStyles, select, clear} from "./onlyjs/minifiedOnly.js";
-import { header } from "./header.js";
+
+import { header } from "./src/header.js";
 
 onlyjs(main);
 function main() {
   resetStyles();
-  setTitle('i24k3.github.io');
+  setTitle('Devloper of all Trades');
   header();
-
  }
+
 
 function setTitle(title = 'webpage') {
   document.title = `${title}`;
