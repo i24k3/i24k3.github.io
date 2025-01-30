@@ -5,6 +5,13 @@ import { create, render, select } from "./../onlyjs/m.js";
 import { style, setStyle } from "./../onlyjs/m.js";
 import { addEvent, setEvent } from "./../onlyjs/m.js";
 
+// header > div > a, header> div>span*3 , header> nav > ul> li > a 
+//
+const BLACK = `#292F36`;
+const RED = `#FF6B6B`;
+const GREEN = `#4ECDC4`;
+const WHITE = `#EAEAEA`;
+
 export function header() 
 {
   const hdr_a = {
@@ -12,25 +19,55 @@ export function header()
     className: 'header',
   };
   const hdr_s ={
-    display: 'flex',
-    jsutifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '20px 40px',
-    backgroundColor: '#222',
-    color: '#fff',
-  };
+    resp:{
+      small:{
+        backgroundColor: BLACK,
+        width: '100%',
+        display: 'flex',
+        jsutifyContent: 'center',
+        alignItems: 'center',
+        padding: '20px 40px',
+        color: WHITE,
+      },
+      medium: {
+        backgroundColor: BLACK,
+        width: '100%',
+        display: 'flex',
+        jsutifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '30px 50px',
+        color: WHITE,
+
+      },
+      large:{
+        backgroundColor: BLACK,
+        width: '100%',
+        display: 'flex',
+        jsutifyContent: 'space-between',
+        alignItems: 'center',
+        padding: '40px 60px',
+        color: WHITE,
+
+      },
+  }};
 
   const hdr = create(hdr_a, hdr_s);
   render(this, 'inside', hdr);
+
 
   logo(hdr);
 }
 
 
+
+
 function logo(hdr) {
-  
-  const logoDiv = ``;
-  hdr.innerHTML = logoDiv;
+
+  const logoDiv_a = {type: 'div', className: 'logo'};
+  const logoDiv_s = {
+  };
+  const logoDiv = create(logoDiv_a, logoDiv_s);
+  render(hdr, 'inside', logoDiv);
 
   const aa= {
     type: 'a',
@@ -38,26 +75,84 @@ function logo(hdr) {
     className: 'logo_A',
   };
   const as = {
-    fontSize: '24px',
-    fontWeight: 'bold',
-    textDecoration: 'none',
-    color: '#fff',
-    fontFamily: 'orbitron',
+    resp: {
+      small: {
+        fontSize: '22px',
+        fontWeight: 'bold',
+        textDecoration: 'none',
+        color: '#fff',
+        fontFamily: 'orbitron',
+        padding: '5px 11px',
+        cursor: 'pointer',
+
+        borderTop: `1px solid ${GREEN}`,
+        borderBottom: `1px solid ${RED}`,
+
+     },
+      medium: {
+        fontSize: '33px',
+        fontWeight: 'bold',
+        textDecoration: 'none',
+        color: '#fff',
+        fontFamily: 'orbitron',
+        padding: '5px 11px',
+        cursor: 'pointer',
+
+
+        borderTop: `2px solid ${GREEN}`,
+        borderBottom: `2px solid ${RED}`,
+
+
+      },
+      large: {
+        fontSize: '44px',
+        fontWeight: 'bold',
+        textDecoration: 'none',
+        color: '#fff',
+        fontFamily: 'orbitron',
+        padding: '5px 11px',
+        cursor: 'pointer',
+
+        borderTop: `2px solid ${GREEN}`,
+        borderBottom: `2px solid ${RED}`,
+
+      },
+    }
   };
   const hdrLogo = create(aa, as);
-  render(hdr, 'inside', hdrLogo);
+  render(logoDiv, 'inside', hdrLogo);
+}
+
+
+function Nav(hdr) {
  const nav_a = {
     type: 'div',
     className: 'nav',
   };
   const nav_s ={
-    width: '100%',
+    resp:{
+      small:{
+        display: 'none',
+        flexDirection: 'column',
+        backgroundColor: '#222',
+        width: '100%',
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        paddingTop: '50px',
+
+      },
+      medium:{
+        display: 'flex',
+        gap: '22px',
+      },
+      large:{
+        display: 'flex',
+        gap: '20px',
+      },
+    },
   };
-  Nav(nav_a, nav_s);
-}
 
-
-function Nav(nav_a, nav_s) {
   const nav = create(nav_a, nav_s);
    const navInside = `
   <ul>
@@ -68,22 +163,9 @@ function Nav(nav_a, nav_s) {
   </ul>
   `;
 
-  const hdr = select('.header');
   render(hdr, 'inside', nav);
   nav.innerHTML = navInside;
 
-  style('ul', {
-    display: 'flex',
-    listStyleType: 'none',
-  });
-  style('li',{
-    marginLeft: '20px',
-  });
-  style('.links',{
-    textDecoration: 'none',
-    color: '#fff',
-    fontSize: '16px',
-    transition: 'color 0.3s',
-  });
+
   
 }
