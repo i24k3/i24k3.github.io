@@ -3,8 +3,10 @@
 import { onlyjs, resetStyles, clear} from "./../onlyjs/m.js";
 import { create, render, select } from "./../onlyjs/m.js";
 import { style, setStyle } from "./../onlyjs/m.js";
+import { addEvent, setEvent } from "./../onlyjs/m.js";
 
-export function header() {
+export function header() 
+{
   const hdr_a = {
     type: 'div',
     className: 'header',
@@ -21,7 +23,12 @@ export function header() {
   const hdr = create(hdr_a, hdr_s);
   render(this, 'inside', hdr);
 
+  logo(hdr);
+}
 
+
+function logo(hdr) {
+  
   const logoDiv = ``;
   hdr.innerHTML = logoDiv;
 
@@ -46,10 +53,9 @@ export function header() {
   const nav_s ={
     width: '100%',
   };
-
-
   Nav(nav_a, nav_s);
 }
+
 
 function Nav(nav_a, nav_s) {
   const nav = create(nav_a, nav_s);
@@ -79,10 +85,5 @@ function Nav(nav_a, nav_s) {
     fontSize: '16px',
     transition: 'color 0.3s',
   });
-  event('mouseover', {color: '#007BFF'});
-  
-}
-
-function title(params) {
   
 }
