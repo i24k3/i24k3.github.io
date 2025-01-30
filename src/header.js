@@ -1,5 +1,8 @@
 
-import { onlyjs, create, render, resetStyles, select, clear, style, setStyle} from "./../onlyjs/minifiedOnly.js";
+
+import { onlyjs, resetStyles, clear} from "./../onlyjs/m.js";
+import { create, render, select } from "./../onlyjs/m.js";
+import { style, setStyle } from "./../onlyjs/m.js";
 
 export function header() {
   const hdr_a = {
@@ -36,19 +39,21 @@ export function header() {
   };
   const hdrLogo = create(aa, as);
   render(hdr, 'inside', hdrLogo);
-
-  //Nav();
-}
-
-function Nav() {
-  const nav_a = {
+ const nav_a = {
     type: 'div',
     className: 'nav',
   };
-  const nav_s ={};
-  const nav = create(nav_a, nav_s);
+  const nav_s ={
+    width: '100%',
+  };
 
-  const navInside = `
+
+  Nav(nav_a, nav_s);
+}
+
+function Nav(nav_a, nav_s) {
+  const nav = create(nav_a, nav_s);
+   const navInside = `
   <ul>
     <li><a class=links href="#about">About</a></li>
     <li><a class=links href="#portfolio">Portfolio</a></li>
@@ -74,6 +79,7 @@ function Nav() {
     fontSize: '16px',
     transition: 'color 0.3s',
   });
+  event('mouseover', {color: '#007BFF'});
   
 }
 

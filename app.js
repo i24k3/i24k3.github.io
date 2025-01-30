@@ -1,4 +1,6 @@
-import { onlyjs, create, render, resetStyles, select, clear} from "./onlyjs/minifiedOnly.js";
+import { onlyjs, resetStyles, clear} from "./onlyjs/m.js";
+import { create, render, select } from "./onlyjs/m.js";
+import { style, setStyle } from "./onlyjs/m.js";
 
 import { header } from "./src/header.js";
 
